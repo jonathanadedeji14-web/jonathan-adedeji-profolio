@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan Adedeji — Projects</title>
+<style>
+  :root{
+    --bg:#F6F7F9;
+    --ink:#12161D;
+    --muted:#5B6472;
+    --line:#DADFE6;
+    --active:#256C58;
+    --active-soft:#E3EFEA;
+    --creator:#B5602E;
+    --creator-soft:#F6E7DB;
+    --panel:#FFFFFF;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--active); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--active); outline-offset:3px;}
+
+  .wrap{max-width:940px; margin:0 auto; padding:0 24px;}
+
+  header.site{
+    position:sticky; top:0; z-index:10;
+    background:rgba(246,247,249,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
+  .nav .brand{font-family:var(--mono); font-weight:600; font-size:14px; letter-spacing:0.02em;}
+  .nav .links{display:flex; gap:18px; font-family:var(--mono); font-size:12.5px; flex-wrap:wrap;}
+  .nav .links a{color:var(--ink);}
+  .nav .links a:hover{color:var(--active);}
+
+  .pill{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    padding:4px 10px; border-radius:100px;
+    border:1px solid var(--line);
+  }
+  .pill.active{color:var(--active); background:var(--active-soft); border-color:var(--active);}
+  .pill.creator{color:var(--creator); background:var(--creator-soft); border-color:var(--creator);}
+  .pill .dot{width:6px; height:6px; border-radius:50%; background:currentColor;}
+
+  .hero{padding:64px 0 32px;}
+  .eyebrow{font-family:var(--mono); font-size:13px; color:var(--muted); margin-bottom:18px;}
+  h1{
+    font-family:var(--mono); font-weight:600;
+    font-size:clamp(28px, 4.5vw, 42px);
+    line-height:1.18; letter-spacing:-0.01em;
+    margin:0 0 18px;
+  }
+  .sub{font-size:17px; color:var(--muted); max-width:620px; margin:0;}
+
+  section{padding:52px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
+  .section-head h2{font-family:var(--mono); font-size:22px; font-weight:600; margin:0;}
+  .section-head .meta{font-family:var(--mono); font-size:12px; color:var(--muted);}
+
+  .fade{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease;}
+  .fade.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){.fade{opacity:1; transform:none; transition:none;}}
+
+  .log{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:26px; margin-bottom:18px;}
+  .log-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:10px; flex-wrap:wrap;}
+  .log h3{font-size:19px; margin:0;}
+  .log .role{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:14px;}
+  .log p{color:var(--muted); margin:10px 0;}
+  .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
+  .tag{font-family:var(--mono); font-size:11px; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:4px; padding:3px 8px;}
+
+  .result{border-left:3px solid var(--active); padding-left:14px; margin-top:16px; font-size:15px;}
+  .result strong{color:var(--active);}
+  .result.creator{border-left-color:var(--creator);}
+  .result.creator strong{color:var(--creator);}
+
+  .brandgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-top:20px;}
+  .brandcard{background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:18px;}
+  .brandcard .mark{font-family:var(--mono); font-weight:600; font-size:14px; letter-spacing:0.04em; margin-bottom:8px;}
+  .brandcard p{margin:0; font-size:13.5px; color:var(--muted);}
+
+  .proof{
+    border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--panel); margin-top:20px;
+  }
+  .proof img{display:block; width:100%; height:auto;}
+  .proof-caption{padding:14px 18px; font-family:var(--mono); font-size:12px; color:var(--muted); border-top:1px solid var(--line);}
+
+  .stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin-top:20px;}
+  .stat-row .cell{background:var(--panel); padding:14px 16px;}
+  .stat-row .label{font-family:var(--mono); font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted);}
+  .stat-row .val{font-family:var(--mono); font-size:17px; font-weight:600; margin-top:4px;}
+  @media (max-width:700px){ .stat-row{grid-template-columns:1fr 1fr;} }
+
+  .bottom-note{
+    background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--active);
+    border-radius:6px; padding:22px 24px; margin-top:8px;
+  }
+  .bottom-note h3{margin:0 0 10px; font-size:17px;}
+  .bottom-note p{color:var(--muted); margin:8px 0;}
+
+  footer{padding:48px 0 64px; border-top:1px solid var(--line);}
+  footer .row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer .contact{font-family:var(--mono); font-size:13px;}
+  .btn{
+    font-family:var(--mono); font-size:13px; font-weight:600;
+    background:var(--active); color:#fff; padding:10px 18px; border-radius:4px;
+    display:inline-block;
+  }
+  .btn:hover{background:#1B5546; text-decoration:none;}
+  .fine{font-size:12px; color:var(--muted); margin-top:24px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <div class="brand">J. ADEDEJI</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="#atinuda">Atinuda</a>
+      <a href="#ecommerce">E-Commerce</a>
+      <a href="#leadgen">Lead Gen &amp; AI</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div class="eyebrow">DEEP DIVE — PROJECTS</div>
+    <h1>The two projects<br>I'm proudest of.</h1>
+    <p class="sub">Two very different businesses — an agency I helped grow, and a brand I built myself from nothing. Both taught me the same lesson: read the data, adjust fast, don't get attached to what isn't working.</p>
+  </section>
+
+  <section id="atinuda">
+    <div class="section-head fade">
+      <h2>Atinuda Agency</h2>
+      <span class="meta">TikTok Shop Growth &amp; Creator Partnerships — US &amp; UK</span>
+    </div>
+
+    <p class="fade" style="color:var(--muted); max-width:680px; margin-bottom:24px;">
+      Close to three years with Atinuda, across three roles: Sales Representative, then Lead Generation &amp; Outreach Specialist / Web Designer, then Affiliate Manager. I didn't just run campaigns here — I helped build the infrastructure the agency ran on.
+    </p>
+
+    <div class="log fade">
+      <div class="log-top">
+        <h3>Agency website &amp; lead-gen pipeline</h3>
+        <span class="pill active"><span class="dot"></span>Shipped</span>
+      </div>
+      <div class="role">Role: Lead Generation &amp; Outreach Specialist / Web Designer</div>
+      <p>Designed and built the full website for Atinuda Agency from the ground up — built specifically to convert visitors into leads, clearly communicate the agency's services, and establish credibility with brands considering working with them.</p>
+      <p>Alongside the site, I built and managed the agency's own lead-gen pipeline: a consistent monthly flow of qualified brand leads delivered through targeted outreach and campaign management — the same system I now run for myself.</p>
+      <div class="tags">
+        <span class="tag">Web Design</span>
+        <span class="tag">Lead Generation</span>
+        <span class="tag">Client Management</span>
+        <span class="tag">Campaign Management</span>
+      </div>
+    </div>
+
+    <div class="log fade">
+      <div class="log-top">
+        <h3>Creator &amp; affiliate campaigns</h3>
+        <span class="pill creator"><span class="dot"></span>Delivered</span>
+      </div>
+      <div class="role">Role: Affiliate Manager</div>
+      <p>Ran full-cycle affiliate and creator campaigns for consumer brands — sourcing and qualifying the right creators, writing structured briefs, and managing every relationship from cold outreach through to a signed, active partnership.</p>
+      <div class="result creator">Result: <strong>signed creator partnerships across four consumer brands</strong>, taking each one from a cold message to published, sales-driving content.</div>
+
+      <div class="brandgrid">
+        <div class="brandcard">
+          <div class="mark">NUTRISEED</div>
+          <p>Built the outreach pipeline for Nutriseed's TikTok Shop campaign — sourced wellness-focused creators and targeted real audience pain points (bloating, low energy, busy mornings) so every lead converted into content that actually drove measurable sales.</p>
+        </div>
+        <div class="brandcard">
+          <div class="mark">BEAUTY BY EARTH</div>
+          <p>Ran the TikTok Shop affiliate creator program — sourcing and onboarding beauty and skincare creators into an active affiliate partnership.</p>
+        </div>
+        <div class="brandcard">
+          <div class="mark">ZAAP.AI</div>
+          <p>Handled creator sourcing — identifying and qualifying the right creator profiles for the brand before handoff into partnership.</p>
+        </div>
+        <div class="brandcard">
+          <div class="mark">PORCH POTTY</div>
+          <p>Drove new business acquisition and managed affiliate outreach as part of Atinuda's wider client portfolio.</p>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Affiliate Marketing</span>
+        <span class="tag">Influencer Outreach</span>
+        <span class="tag">Creative Briefing</span>
+        <span class="tag">Creator Sourcing</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="ecommerce">
+    <div class="section-head fade">
+      <h2>E-Commerce — Shopify Brand</h2>
+      <span class="meta">Self-Employed, Founder</span>
+    </div>
+
+    <div class="log fade">
+      <div class="log-top">
+        <h3>Building a six-figure brand from zero</h3>
+        <span class="pill active"><span class="dot"></span>Scaled</span>
+      </div>
+      <p>I owned every part of this business myself — product selection, paid ad management, creative testing, and conversion optimisation. There was no team to lean on, so every decision was mine, and every mistake was too.</p>
+      <p>Paid acquisition ran primarily through Meta and TikTok Ads — testing multiple creative angles and audiences on both platforms, cutting what underperformed quickly, and reinvesting into whatever was actually converting. TikTok in particular meant staying on top of fast-moving trends and creative formats, not just running the same ad for months.</p>
+      <p>The early stage was mostly trial and error: testing products, testing creative, testing offers, and killing anything that didn't work fast rather than getting attached to it. Over time that turned into a repeatable system — read the numbers, decide quickly, double down on what's actually converting.</p>
+
+      <div class="proof">
+        <img src="shopify-dashboard.jpg" alt="Shopify sales dashboard showing store performance">
+        <div class="proof-caption">Store analytics dashboard — a snapshot from the Shopify back end during a strong growth stretch.</div>
+      </div>
+
+      <div class="stat-row">
+        <div class="cell">
+          <div class="label">Total Sales (period)</div>
+          <div class="val">€100,124.5</div>
+        </div>
+        <div class="cell">
+          <div class="label">Orders</div>
+          <div class="val">3.87K</div>
+        </div>
+        <div class="cell">
+          <div class="label">Conversion Rate</div>
+          <div class="val">2.29%</div>
+        </div>
+        <div class="cell">
+          <div class="label">Orders To Fulfil</div>
+          <div class="val">50+</div>
+        </div>
+      </div>
+
+      <div class="result">Result: <strong>scaled to six-figure revenue</strong> — built on the same instinct I use in outbound now: test it, read what actually happened, adjust, go again.</div>
+
+      <div class="tags">
+        <span class="tag">Meta Ads</span>
+        <span class="tag">TikTok Ads</span>
+        <span class="tag">Creative Testing</span>
+        <span class="tag">Conversion Optimisation</span>
+        <span class="tag">Customer Psychology</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadgen">
+    <div class="section-head fade">
+      <h2>Lead gen &amp; AI, tying it together</h2>
+      <span class="meta">Current work</span>
+    </div>
+
+    <div class="bottom-note fade">
+      <h3>What my clients actually get</h3>
+      <p>Running my own outbound pipeline — sourcing, filtering, messaging, tracking — has meant I can bring each small business client multiple qualifying leads every month, not just a one-off burst of activity. Every lead is filtered and contacted directly by me, so what lands with the client is already qualified, not just a raw list.</p>
+      <p>On top of that, once I built and deployed the AI support agent (Voiceflow, Claude API, Make.com), client operations got noticeably smoother — questions get answered outside normal hours, leads get captured automatically instead of falling through the cracks, and the business owner isn't the one manually replying to every message anymore. It's the same principle from the Shopify brand and the Atinuda pipeline: build the system once, and it keeps paying off after you stop actively working it.</p>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="row">
+      <div class="contact">
+        Edenderry, Co. Offaly, Ireland — Open to Remote / Hybrid<br>
+        jonathanadedeji14@gmail.com · 085 153 7987
+      </div>
+      <a class="btn" href="https://www.linkedin.com/in/jonathan-adedeji-1b37922b6/" target="_blank" rel="noopener">View LinkedIn →</a>
+    </div>
+    <div class="fine">Everything on this page is real, current work — not a mockup. Happy to walk through any of it live.</div>
+  </footer>
+
+</div>
+
+<script>
+  const items = document.querySelectorAll('.fade');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    items.forEach(i => obs.observe(i));
+  } else {
+    items.forEach(i => i.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
